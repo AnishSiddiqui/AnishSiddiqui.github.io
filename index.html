@@ -1,16 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Anish Siddiqui - Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#1e3a8a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom CSS for smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Animation for section headers */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-header {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Custom styling for project cards */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-<body>
-  <h1>Welcome!</h1>
-  <p>Hi, I'm <strong>Anish Siddiqui</strong>. This is my professional site.</p>
-  <ul>
-    <li><a href="https://www.linkedin.com/in/YOURNAME">LinkedIn</a></li>
-    <li><a href="https://github.com/AnishSiddiqui">GitHub</a></li>
-    <li><a href="mailto:your.email@example.com">Contact Me</a></li>
-  </ul>
+<body class="bg-white font-sans text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-primary">Portfolio</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-primary hover:text-secondary">Overview</a>
+                    <a href="#experience" class="text-gray-600 hover:text-primary">Experience</a>
+                    <a href="#projects" class="text-gray-600 hover:text-primary">Projects</a>
+                    <a href="#skills" class="text-gray-600 hover:text-primary">Skills</a>
+                    <a href="#contact" class="text-gray-600 hover:text-primary">Contact</a>
+                </div>
+                <button class="md:hidden focus:outline-none" id="menu-toggle">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="md:hidden hidden mt-2" id="mobile-menu">
+                <a href="#overview" class="block py-2 text-primary">Overview</a>
+                <a href="#experience" class="block py-2 text-gray-600">Experience</a>
+                <a href="#projects" class="block py-2 text-gray-600">Projects</a>
+                <a href="#skills" class="block py-2 text-gray-600">Skills</a>
+                <a href="#contact" class="block py-2 text-gray-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overview Section -->
+    <section id="overview" class="min-h-screen pt-20 pb-16 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-6 py-12 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- Text Content -->
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4 section-header">Anish Siddiqui</h1>
+                    <p class="text-lg md:text-xl text-gray-700 mb-8">
+                        <!-- EDIT THIS DESCRIPTION -->
+                        Passionate engineer with expertise in embedded systems and application development. Skilled in hardware prototyping, software development, and data analysis. Committed to creating innovative solutions to complex problems using advanced technology.
+                    </p>
+                    <a href="#" class="bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-lg transition duration-300 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        Download Resume
+                    </a>
+                </div>
+                <!-- Image -->
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary shadow-xl">
+                        <!-- REPLACE WITH YOUR IMAGE -->
+                        <img src="https://via.placeholder.com/400x400" alt="Profile Picture" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-primary mb-12 section-header">Professional Experience</h2>
+            
+            <!-- Experience 1 -->
+            <div class="mb-12 p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition duration-300">
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-3/4">
+            <h3 class="text-xl font-bold text-primary mb-2">Information Technology Intern</h3>
+            <h4 class="text-lg font-semibold text-gray-700 mb-2">Enterprise Products Partners L.P.</h4>
+            <p class="text-gray-600 mb-2">May 2024 - August 2024</p>
+            <p class="text-gray-700">
+               As an Information Technology Intern, I was tasked with Software Development for in-house Applications. Using SQL and Oracle APEX, I designed, deployed, and maintained programs utilized in eBusiness Systems solutions. Additionally, I partnered with fellow interns to construct an asset outlook profile on crude liquid storage and international transportation services. Working in an innovative environment allowed me to learn a comprehensive set of skills including, relational databases configuration, financial modeling, user interface evolution, and offsite control systems analysis.
+            </p>
+        </div>
+        <div class="md:w-1/4 flex items-center justify-center mt-4 md:mt-0">
+                        <!-- REPLACE WITH COMPANY LOGO -->
+                        <img src="https://mms.businesswire.com/media/20250228186600/en/241014/22/EPP_Logo_RGB.jpg" alt="Company Logo" class="h-24 object-contain">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Experience 2 -->
+            <div class="mb-12 p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition duration-300">
+                 <div class="flex flex-col md:flex-row">
+                    <div class="md:w-3/4">
+                        <h3 class="text-xl font-bold text-primary mb-2">Data Scientist</h3>
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">NRG Energy</h4>
+                        <p class="text-gray-600 mb-2">May 2023 - August 2023</p>
+                        <p class="text-gray-700">
+                         As a Data Scientist, I was tasked with constructing Data Pipelines to extract valuable information for the business. Using statistical modeling and a variety of coding packages, I was able to create an algorithm to predict customer behavior. By implementing the ETL methods, I was able to refine the data to make it understandable. In this internship I learned a diverse set of skills including PowerBI platform construction, AI implementation, batch processing, and complex data visualization.<br>
+                         
+                         </p>
+
+                    </div>
+                    <div class="md:w-1/4 flex items-center justify-center mt-4 md:mt-0">
+                        <!-- REPLACE WITH COMPANY LOGO -->
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7j_ZSo0cVZuhbNR1UNQ32J849Tv_ALQw5ZQ&s" alt="Company Logo" class="h-24 object-contain">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Experience 3 -->
+            <div class="p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition duration-300">
+               <div class="flex flex-col md:flex-row">
+                    <div class="md:w-3/4">
+                        <h3 class="text-xl font-bold text-primary mb-2">Pharmacy Technican</h3>
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">CVS Pharmacy</h4>
+                        <p class="text-gray-600 mb-2">January 2023 - May 2023</p>
+                        <p class="text-gray-700">
+                        A Pharmacy Technician is responsible for collaborating with a certified Pharmacist to ensure proper preparation, storage, and purchase of designated medications. A technician also cooperates with insurance companies to provide the best possible price for customers. I also administer Covid-19 tests and scheduled the appropriate vaccinations for eligible patients. Additionally, my job includes answering any questions about prescriptions and optimizing the workflow of the Pharmacy.<br>
+                        </p>
+
+                    </div>
+                    <div class="md:w-1/4 flex items-center justify-center mt-4 md:mt-0">
+                        <!-- REPLACE WITH COMPANY LOGO -->
+                        <img src="data:image/png;base64,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" alt="Company Logo" class="h-24 object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-primary mb-12 section-header">Projects</h2>
+            
+            <!-- Embedded Systems - Robotics -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-primary mb-6 text-center">Embedded Systems - Robotics</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                        <h4 class="text-xl font-bold text-primary mb-2">OWI-535 Robotic Arm Edge</h4>
+                        <p class="text-gray-700">
+                            Assembled OWI-535 Robotic Arm Edge connected to custom PCB allowing users full 6DOF manual control 
+                        </p>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                        <h4 class="text-xl font-bold text-primary mb-2">Color Tracing Feedback Sysytem</h4>
+                        <p class="text-gray-700">
+                            Configured MATLAB vision system with Logitech Pro webcam for autonomous object tracking using color detection
+                        </p>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                        <h4 class="text-xl font-bold text-primary mb-2">Voice Control Robot</h4>
+                        <p class="text-gray-700">
+                            Deployed modified Vosk speech engine alongside Python and Arduino for offline voice-based control
+                        </p>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                        <h4 class="text-xl font-bold text-primary mb-2">Dynamic Contol System</h4>
+                        <p class="text-gray-700">
+                            Engineered interactive motion response interface utilizing accelerometer modules for adaptive robotic actuation
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Application Development -->
+            <div>
+                <h3 class="text-2xl font-bold text-primary mb-6 text-center">Application Development</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+<div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+    <div>
+
+                            <h4 class="text-xl font-bold text-primary mb-2">International Energy Tracking Interface</h4>
+                            <p class="text-gray-700 mb-4">
+                               Constructed a responsive Oracle APEX web application that allows users to select countries and visualize energy generation and population trends over time through interactive charts
+
+                            </p>
+                        </div>
+                        
+                    </div>
+                        
+                    
+                    <!-- Project 2 -->
+                   <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+    <div>
+
+                            <h4 class="text-xl font-bold text-primary mb-2">Global Oil Dynamic Portfolio</h4>
+                            <p class="text-gray-700 mb-4">
+                                Created a comprehensive PowerBI dashboard that visualizes key metrics in oil consumption based on global forecasts. By transforming and modeling raw data from structured sources, the user can see the effect in commodities trading based on patterns in the international resource market.
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-primary mb-12 section-header">Skills</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Computer Skills -->
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">Computer Skills</h3>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-microchip text-primary mr-2"></i> Hardware
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-robot mr-2"></i> Arduino
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-microchip mr-2"></i> TI LaunchPad
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-brain mr-2"></i> EV3 Firmware
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-project-diagram mr-2"></i> Elegoo Uno R3
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-wifi mr-2"></i> ESP32/ESP8266
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-microchip mr-2"></i> STM32 microcontrollers
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-code text-primary mr-2"></i> Software
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-database mr-2"></i> PL/SQL
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-database mr-2"></i> SQL
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-laptop-code mr-2"></i> ARM assembly
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-cube mr-2"></i> KiCad
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-terminal mr-2"></i> Command
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-flask mr-2"></i> JupyterLab
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-chart-line mr-2"></i> MATLAB
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fab fa-cuttlefish mr-2"></i> C++
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fab fa-java mr-2"></i> Java
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fab fa-html5 mr-2"></i> HTML
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-window-maximize text-primary mr-2"></i> Applications
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-database mr-2"></i> Oracle APEX
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-cloud mr-2"></i> Databricks
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-chart-bar mr-2"></i> PowerBi
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-paint-brush mr-2"></i> Illustrator
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-image mr-2"></i> Photoshop
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-database mr-2"></i> Access
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-file-powerpoint mr-2"></i> PowerPoint
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-file-excel mr-2"></i> Excel
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-file-word mr-2"></i> MS Word
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-desktop text-primary mr-2"></i> Operating Systems
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fab fa-apple mr-2"></i> macOS
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fab fa-android mr-2"></i> Android
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fab fa-linux mr-2"></i> Linux
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fas fa-desktop mr-2"></i> ReactOS
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fab fa-windows mr-2"></i> Windows
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
+                                <i class="fab fa-apple mr-2"></i> iOS
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analytical Skills -->
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">Analytical Skills</h3>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-square-root-alt text-primary mr-2"></i> Mathematical Modeling
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full">
+                                Algebraic Optimization
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full">
+                                Finite Elements
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full">
+                                Cartesian Geometry
+                            </span>
+                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full">
+                                Numerical Methods
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-chart-pie text-primary mr-2"></i> Statistical Reasoning
+                        </h4>
+                        <p class="text-gray-700 bg-blue-50 p-4 rounded-lg">
+                            Exceptional capability in researching, detailing, and presenting significant data to clientele. 
+                            Skilled in data analysis, interpretation, and visualization to drive decision-making processes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-primary mb-12 section-header">Contact Me</h2>
+            
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-full mr-4">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Email</h3>
+                        <p class="text-gray-600">anishsiddiqui99@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary text-white p-3 rounded-full mr-4">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">LinkedIn</h3>
+                        <a href="#" class="text-blue-600 hover:underline">www.linkedin.com/in/anishsiddiqui99</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="bg-primary text-white p-3 rounded-full mr-4">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Location</h3>
+                        <p class="text-gray-600">Houston, Texas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Anish Siddiqui. All rights reserved.</p>
+            
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
