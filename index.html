@@ -1,168 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1e40af',
-                        secondary: '#1e3a8a',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS for smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        body {
+            font-family: 'Inter', sans-serif;
         }
-        
-        /* Animation for section headers */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
-        .section-header {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        /* Custom styling for project cards */
-        .project-card {
+        .card-hover {
             transition: all 0.3s ease;
         }
-        
-        .project-card:hover {
+        .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+        }
+        .section-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-white font-sans text-gray-800">
+<body class="bg-gray-50 text-gray-800 antialiased">
+
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white shadow-md z-50">
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex justify-between items-center">
-                <a href="#" class="text-2xl font-bold text-primary">Portfolio</a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#overview" class="text-primary hover:text-secondary">Overview</a>
-                    <a href="#experience" class="text-gray-600 hover:text-primary">Experience</a>
-                    <a href="#projects" class="text-gray-600 hover:text-primary">Projects</a>
-                    <a href="#skills" class="text-gray-600 hover:text-primary">Skills</a>
-                    <a href="#contact" class="text-gray-600 hover:text-primary">Contact</a>
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold gradient-text">Portfolio</span>
                 </div>
-                <button class="md:hidden focus:outline-none" id="menu-toggle">
-                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-gray-700 hover:text-indigo-600 font-medium transition">Overview</a>
+                    <a href="#experience" class="text-gray-700 hover:text-indigo-600 font-medium transition">Experience</a>
+                    <a href="#projects" class="text-gray-700 hover:text-indigo-600 font-medium transition">Projects</a>
+                    <a href="#certifications" class="text-gray-700 hover:text-indigo-600 font-medium transition">Certifications</a>
+                    <a href="#skills" class="text-gray-700 hover:text-indigo-600 font-medium transition">Skills</a>
+                    <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium transition">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-indigo-600 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
-            <div class="md:hidden hidden mt-2" id="mobile-menu">
-                <a href="#overview" class="block py-2 text-primary">Overview</a>
-                <a href="#experience" class="block py-2 text-gray-600">Experience</a>
-                <a href="#projects" class="block py-2 text-gray-600">Projects</a>
-                <a href="#skills" class="block py-2 text-gray-600">Skills</a>
-                <a href="#contact" class="block py-2 text-gray-600">Contact</a>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 font-medium">Overview</a>
+                <a href="#experience" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 font-medium">Experience</a>
+                <a href="#projects" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 font-medium">Projects</a>
+                <a href="#certifications" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 font-medium">Certifications</a>
+                <a href="#skills" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 font-medium">Skills</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Overview Section -->
-    <section id="overview" class="min-h-screen pt-20 pb-16 bg-gradient-to-b from-blue-50 to-white">
-        <div class="container mx-auto px-6 py-12 md:py-24">
-            <div class="flex flex-col md:flex-row items-center">
-                <!-- Text Content -->
-                <div class="md:w-1/2 mb-12 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4 section-header">Anish Siddiqui</h1>
-                    <p class="text-lg md:text-xl text-gray-700 mb-8">
-                        <!-- EDIT THIS DESCRIPTION -->
-                        Passionate engineer with expertise in embedded systems and application development. Skilled in hardware prototyping, software development, and data analysis. Committed to creating innovative solutions to complex problems using advanced technology.
+    <section id="overview" class="pt-32 pb-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 section-fade">
+                    <h1 class="text-5xl font-bold text-gray-900 mb-6">John Doe</h1>
+                    <div class="w-20 h-1 bg-indigo-600 mb-6"></div>
+                    <p class="text-xl text-gray-600 leading-relaxed mb-4">
+                        I am a multidisciplinary engineer specializing in mechanical systems design and full-stack application development, with a passion for creating innovative solutions that bridge the gap between hardware and software.
                     </p>
-                    <a href="Anish_Siddiqui_Resume.pdf" download class="bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-lg transition duration-300 inline-flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                        </svg>
-                Download Resume
-                    </a>
-                    
+                    <p class="text-xl text-gray-600 leading-relaxed mb-4">
+                        With over 5 years of experience in product development and embedded systems, I have successfully led cross-functional teams to deliver high-impact projects from concept to production.
+                    </p>
+                    <p class="text-xl text-gray-600 leading-relaxed mb-8">
+                        My expertise lies in combining mechanical design principles with modern software development practices to build robust, scalable, and user-centric solutions for complex engineering challenges.
+                    </p>
+                    <button class="inline-flex items-center px-8 py-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                        Download Resume
+                    </button>
                 </div>
-                <!-- Image -->
-                <!-- Image -->
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative w-80 h-80 md:w-[28rem] md:h-[28rem] rounded-full overflow-hidden border-4 border-primary shadow-xl">
-                        <img src="Anish%20Siddiqui%20Badge%20Photo3.jpg" alt="Profile Picture" class="absolute top-0 left-0 w-full h-full object-cover">
+                <div class="order-1 lg:order-2 flex justify-center section-fade">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-indigo-100 rounded-full opacity-50 blur-2xl"></div>
+                        <img src="http://static.photos/people/400x400/123" alt="Profile Picture" class="relative w-80 h-80 object-cover rounded-full shadow-2xl border-4 border-white">
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-primary mb-12 section-header">Professional Experience</h2>
-            
-            <!-- Experience 1 -->
-            <div class="mb-12 p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition duration-300">
-                <div class="flex flex-col md:flex-row">
-                    <div class="md:w-3/4">
-            <h3 class="text-xl font-bold text-primary mb-2">Information Technology Intern</h3>
-            <h4 class="text-lg font-semibold text-gray-700 mb-2">Enterprise Products Partners L.P.</h4>
-            <p class="text-gray-600 mb-2">May 2024 - August 2024</p>
-            <p class="text-gray-700">
-               As an Information Technology Intern, I was tasked with Software Development for in-house Applications. Using SQL and Oracle APEX, I designed, deployed, and maintained programs utilized in eBusiness Systems solutions. Additionally, I partnered with fellow interns to construct an asset outlook profile on crude liquid storage and international transportation services. Working in an innovative environment allowed me to learn a comprehensive set of skills including, relational databases configuration, financial modeling, user interface evolution, and offsite control systems analysis.
-            </p>
-        </div>
-        <div class="md:w-1/4 flex items-center justify-center mt-4 md:mt-0">
-                        <!-- REPLACE WITH COMPANY LOGO -->
-                        <img src="https://mms.businesswire.com/media/20250228186600/en/241014/22/EPP_Logo_RGB.jpg" alt="Company Logo" class="h-24 object-contain">
+    <section id="experience" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-fade">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Professional Experience</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Experience 1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover section-fade">
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
+                        <div class="lg:col-span-3">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-2xl font-bold text-gray-900 mr-4">Senior Mechanical Engineer</h3>
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">Current</span>
+                            </div>
+                            <p class="text-lg text-indigo-600 font-semibold mb-2">Tesla, Inc.</p>
+                            <p class="text-gray-500 mb-4 flex items-center">
+                                <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                January 2021 - Present
+                            </p>
+                            <p class="text-gray-600 leading-relaxed">
+                                Leading the design and development of advanced manufacturing systems for electric vehicle battery production. Collaborating with cross-functional teams to optimize assembly line efficiency and reduce production costs by 25%. Implementing automated quality control systems using computer vision and machine learning algorithms. Managing vendor relationships and overseeing the integration of third-party mechanical components into existing production infrastructure. Spearheading sustainability initiatives to reduce manufacturing waste and improve energy efficiency across all production facilities.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-1 flex justify-center">
+                            <img src="http://static.photos/technology/200x200/1" alt="Tesla Logo" class="w-32 h-32 object-contain rounded-lg">
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Experience 2 -->
-            <div class="mb-12 p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition duration-300">
-                 <div class="flex flex-col md:flex-row">
-                    <div class="md:w-3/4">
-                        <h3 class="text-xl font-bold text-primary mb-2">Data Scientist</h3>
-                        <h4 class="text-lg font-semibold text-gray-700 mb-2">NRG Energy</h4>
-                        <p class="text-gray-600 mb-2">May 2023 - August 2023</p>
-                        <p class="text-gray-700">
-                         As a Data Scientist, I was tasked with constructing Data Pipelines to extract valuable information for the business. Using statistical modeling and a variety of coding packages, I was able to create an algorithm to predict customer behavior. By implementing the ETL methods, I was able to refine the data to make it understandable. In this internship I learned a diverse set of skills including PowerBI platform construction, AI implementation, batch processing, and complex data visualization.<br>
-                         
-                         </p>
 
-                    </div>
-                    <div class="md:w-1/4 flex items-center justify-center mt-4 md:mt-0">
-                        <!-- REPLACE WITH COMPANY LOGO -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7j_ZSo0cVZuhbNR1UNQ32J849Tv_ALQw5ZQ&s" alt="Company Logo" class="h-24 object-contain">
+                <!-- Experience 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover section-fade">
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
+                        <div class="lg:col-span-3">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Mechanical Design Engineer</h3>
+                            <p class="text-lg text-indigo-600 font-semibold mb-2">Boeing Commercial Airplanes</p>
+                            <p class="text-gray-500 mb-4 flex items-center">
+                                <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                June 2018 - December 2020
+                            </p>
+                            <p class="text-gray-600 leading-relaxed">
+                                Designed and analyzed structural components for commercial aircraft using CATIA and ANSYS simulation software. Conducted finite element analysis (FEA) to validate structural integrity under various load conditions and environmental factors. Collaborated with aerodynamics teams to optimize wing component designs for improved fuel efficiency. Developed automated design tools using Python that reduced drafting time by 40% and improved accuracy of technical documentation. Participated in design reviews and presented technical findings to senior engineering leadership and FAA certification representatives.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-1 flex justify-center">
+                            <img src="http://static.photos/technology/200x200/2" alt="Boeing Logo" class="w-32 h-32 object-contain rounded-lg">
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Experience 3 -->
-            <div class="p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition duration-300">
-               <div class="flex flex-col md:flex-row">
-                    <div class="md:w-3/4">
-                        <h3 class="text-xl font-bold text-primary mb-2">Pharmacy Technican</h3>
-                        <h4 class="text-lg font-semibold text-gray-700 mb-2">CVS Pharmacy</h4>
-                        <p class="text-gray-600 mb-2">January 2023 - May 2023</p>
-                        <p class="text-gray-700">
-                        A Pharmacy Technician is responsible for collaborating with a certified Pharmacist to ensure proper preparation, storage, and purchase of designated medications. A technician also cooperates with insurance companies to provide the best possible price for customers. I also administer Covid-19 tests and scheduled the appropriate vaccinations for eligible patients. Additionally, my job includes answering any questions about prescriptions and optimizing the workflow of the Pharmacy.<br>
-                        </p>
 
-                    </div>
-                    <div class="md:w-1/4 flex items-center justify-center mt-4 md:mt-0">
-                        <!-- REPLACE WITH COMPANY LOGO -->
-                        <img src="data:image/png;base64,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" alt="Company Logo" class="h-24 object-contain">
+                <!-- Experience 3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover section-fade">
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
+                        <div class="lg:col-span-3">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Junior Mechanical Engineer</h3>
+                            <p class="text-lg text-indigo-600 font-semibold mb-2">General Electric Aviation</p>
+                            <p class="text-gray-500 mb-4 flex items-center">
+                                <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                August 2016 - May 2018
+                            </p>
+                            <p class="text-gray-600 leading-relaxed">
+                                Supported the development of jet engine turbine components through detailed CAD modeling and physical prototyping. Assisted senior engineers in performing stress analysis and thermal simulations to predict component lifespan under extreme operating conditions. Coordinated with manufacturing teams to ensure design specifications were accurately translated into production processes. Documented test procedures and results for regulatory compliance and quality assurance standards. Contributed to root cause analysis investigations for field failures and implemented design modifications to prevent recurrence.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-1 flex justify-center">
+                            <img src="http://static.photos/technology/200x200/3" alt="GE Logo" class="w-32 h-32 object-contain rounded-lg">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -170,76 +183,188 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 bg-blue-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-primary mb-12 section-header">Projects</h2>
-            
-            <!-- Embedded Systems - Robotics -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-bold text-primary mb-6 text-center">Embedded Systems - Robotics</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Project 1 -->
-                    <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                        <h4 class="text-xl font-bold text-primary mb-2">OWI-535 Robotic Arm Edge</h4>
-                        <p class="text-gray-700">
-                            Assembled OWI-535 Robotic Arm Edge connected to custom PCB allowing users full 6DOF manual control 
-                        </p>
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-fade">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto mb-8"></div>
+            </div>
+
+            <!-- Mechanical Systems -->
+            <div class="mb-16 section-fade">
+                <h3 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                    <i data-lucide="cog" class="w-8 h-8 mr-3 text-indigo-600"></i>
+                    Mechanical Systems
+                </h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 with Screenshot -->
+                    <div class="lg:col-span-3 bg-gray-50 rounded-2xl overflow-hidden shadow-lg card-hover">
+                        <div class="grid grid-cols-1 lg:grid-cols-2">
+                            <div class="p-8">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-3">Autonomous Robotic Arm System</h4>
+                                <p class="text-indigo-600 font-semibold mb-4">Six-Axis Industrial Manipulator</p>
+                                <p class="text-gray-600 leading-relaxed mb-4">
+                                    Designed and manufactured a precision robotic arm capable of sub-millimeter accuracy for automated assembly tasks. The system integrates computer vision for object recognition and adaptive grip control based on real-time force feedback sensors. Implemented inverse kinematics algorithms to optimize motion paths and reduce cycle time by 35%. The project involved extensive FEA analysis to minimize weight while maintaining structural rigidity, resulting in a 20% reduction in power consumption compared to commercial alternatives.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mt-4">
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">SolidWorks</span>
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">FEA Analysis</span>
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">Automation</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-200 h-96 lg:h-auto">
+                                <img src="http://static.photos/industry/600x400/42" alt="Robotic Arm Project" class="w-full h-full object-cover">
+                            </div>
+                        </div>
                     </div>
-                    
+
                     <!-- Project 2 -->
-                    <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                        <h4 class="text-xl font-bold text-primary mb-2">Color Tracing Feedback Sysytem</h4>
-                        <p class="text-gray-700">
-                            Configured MATLAB vision system with Logitech Pro webcam for autonomous object tracking using color detection
+                    <div class="bg-gray-50 rounded-2xl p-8 shadow-lg card-hover">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                            <i data-lucide="wind" class="w-6 h-6 text-indigo-600"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">High-Efficiency HVAC Heat Exchanger</h4>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            Developed a novel micro-channel heat exchanger design that improved thermal efficiency by 40% while reducing overall system footprint by 30%. Conducted CFD simulations to optimize fluid dynamics and heat transfer coefficients across varying load conditions. The design utilized additive manufacturing techniques to create complex internal geometries impossible with traditional machining methods.
                         </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">CFD</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">Thermal Design</span>
+                        </div>
                     </div>
-                    
+
                     <!-- Project 3 -->
-                    <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                        <h4 class="text-xl font-bold text-primary mb-2">Voice Control Robot</h4>
-                        <p class="text-gray-700">
-                            Deployed modified Vosk speech engine alongside Python and Arduino for offline voice-based control
+                    <div class="bg-gray-50 rounded-2xl p-8 shadow-lg card-hover">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                            <i data-lucide="zap" class="w-6 h-6 text-indigo-600"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Electric Vehicle Transmission System</h4>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            Engineered a compact, high-torque transmission system specifically designed for electric vehicle applications. The system features a unique planetary gear arrangement that eliminates the need for traditional clutch mechanisms while providing seamless power delivery. Material selection focused on lightweight aluminum alloys and carbon fiber composites to minimize rotational inertia and maximize acceleration performance.
                         </p>
-                    </div>
-                    
-                    <!-- Project 4 -->
-                    <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                        <h4 class="text-xl font-bold text-primary mb-2">Dynamic Contol System</h4>
-                        <p class="text-gray-700">
-                            Engineered interactive motion response interface utilizing accelerometer modules for adaptive robotic actuation
-                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">Gear Design</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">EV Systems</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Application Development -->
-            <div>
-                <h3 class="text-2xl font-bold text-primary mb-6 text-center">Application Development</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Project 1 -->
-<div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-    <div>
-
-                            <h4 class="text-xl font-bold text-primary mb-2">International Energy Tracking Interface</h4>
-                            <p class="text-gray-700 mb-4">
-                               Constructed a responsive Oracle APEX web application that allows users to select countries and visualize energy generation and population trends over time through interactive charts
-
-                            </p>
+            <div class="section-fade">
+                <h3 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                    <i data-lucide="code-2" class="w-8 h-8 mr-3 text-indigo-600"></i>
+                    Application Development
+                </h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- App Project 1 -->
+                    <div class="bg-gray-50 rounded-2xl shadow-lg p-8 card-hover">
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 items-start">
+                            <div class="sm:col-span-3">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-3">Manufacturing Execution System (MES)</h4>
+                                <p class="text-indigo-600 font-semibold mb-4">Full-Stack Web Application</p>
+                                <p class="text-gray-600 leading-relaxed mb-4">
+                                    Developed a comprehensive MES platform that tracks production workflows, manages inventory, and generates real-time analytics for manufacturing operations. The system integrates with IoT sensors on the factory floor to provide live monitoring of equipment status and production metrics. Built using React and Node.js with a PostgreSQL database, the application serves over 500 daily users and has reduced production reporting time by 60%.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">React</span>
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">Node.js</span>
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">IoT Integration</span>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-1 flex justify-center">
+                                <img src="http://static.photos/technology/150x150/10" alt="MES App Logo" class="w-24 h-24 object-contain rounded-lg shadow-md">
+                            </div>
                         </div>
-                        
                     </div>
-                        
-                    
-                    <!-- Project 2 -->
-                   <div class="project-card bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-    <div>
 
-                            <h4 class="text-xl font-bold text-primary mb-2">Global Oil Dynamic Portfolio</h4>
-                            <p class="text-gray-700 mb-4">
-                                Created a comprehensive PowerBI dashboard that visualizes key metrics in oil consumption based on global forecasts. By transforming and modeling raw data from structured sources, the user can see the effect in commodities trading based on patterns in the international resource market.
-                            </p>
+                    <!-- App Project 2 -->
+                    <div class="bg-gray-50 rounded-2xl shadow-lg p-8 card-hover">
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 items-start">
+                            <div class="sm:col-span-3">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-3">Predictive Maintenance AI Platform</h4>
+                                <p class="text-indigo-600 font-semibold mb-4">Machine Learning Application</p>
+                                <p class="text-gray-600 leading-relaxed mb-4">
+                                    Created a Python-based machine learning application that analyzes vibration and temperature data from industrial machinery to predict potential failures before they occur. The system uses LSTM neural networks to identify patterns indicative of bearing wear, misalignment, and lubrication issues. Deployed as a cloud-native solution using AWS Lambda and Docker containers, achieving 95% accuracy in failure prediction with a 2-week advance warning window.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">Python</span>
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">TensorFlow</span>
+                                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">AWS</span>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-1 flex justify-center">
+                                <img src="http://static.photos/technology/150x150/11" alt="AI Platform Logo" class="w-24 h-24 object-contain rounded-lg shadow-md">
+                            </div>
                         </div>
-                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-fade">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Certifications</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Certification 1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover section-fade">
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+                        <div class="sm:col-span-3">
+                            <div class="flex items-start justify-between mb-2">
+                                <h3 class="text-2xl font-bold text-gray-900">Professional Engineer (PE) License</h3>
+                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Active</span>
+                            </div>
+                            <p class="text-lg text-indigo-600 font-semibold mb-2">National Society of Professional Engineers</p>
+                            <p class="text-gray-500 mb-4 flex items-center">
+                                <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                Issued: March 2020
+                            </p>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                Licensed Professional Engineer in Mechanical Engineering, authorized to practice engineering in all 50 states. Demonstrated comprehensive knowledge of engineering principles, ethics, and state-specific regulations through rigorous examination and professional experience verification. Certification requires ongoing continuing education to maintain current knowledge of industry standards and emerging technologies.
+                            </p>
+                            <button class="inline-flex items-center px-4 py-2 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition">
+                                <i data-lucide="file-down" class="w-4 h-4 mr-2"></i>
+                                Download Certificate
+                            </button>
+                        </div>
+                        <div class="sm:col-span-1 flex justify-center items-start">
+                            <img src="http://static.photos/education/150x150/1" alt="PE Certification Logo" class="w-28 h-28 object-contain rounded-lg shadow-md">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certification 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover section-fade">
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+                        <div class="sm:col-span-3">
+                            <div class="flex items-start justify-between mb-2">
+                                <h3 class="text-2xl font-bold text-gray-900">AWS Certified Solutions Architect</h3>
+                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Active</span>
+                            </div>
+                            <p class="text-lg text-indigo-600 font-semibold mb-2">Amazon Web Services</p>
+                            <p class="text-gray-500 mb-4 flex items-center">
+                                <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                Issued: August 2022
+                            </p>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                Professional-level certification validating expertise in designing distributed systems on AWS infrastructure. Demonstrated ability to architect scalable, cost-effective, and secure cloud solutions for complex enterprise applications. Skills include multi-tier applications, serverless architectures, microservices, and hybrid cloud integrations with emphasis on high availability and disaster recovery.
+                            </p>
+                            <button class="inline-flex items-center px-4 py-2 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition">
+                                <i data-lucide="file-down" class="w-4 h-4 mr-2"></i>
+                                Download Certificate
+                            </button>
+                        </div>
+                        <div class="sm:col-span-1 flex justify-center items-start">
+                            <img src="http://static.photos/technology/150x150/12" alt="AWS Certification Logo" class="w-28 h-28 object-contain rounded-lg shadow-md">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -247,173 +372,149 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-primary mb-12 section-header">Skills</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- Computer Skills -->
-                <div>
-                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">Computer Skills</h3>
-                    
-                    <div class="mb-8">
-                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-microchip text-primary mr-2"></i> Hardware
-                        </h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-robot mr-2"></i> Arduino
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-microchip mr-2"></i> TI LaunchPad
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-brain mr-2"></i> EV3 Firmware
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-project-diagram mr-2"></i> Elegoo Uno R3
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-wifi mr-2"></i> ESP32/ESP8266
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-microchip mr-2"></i> STM32 microcontrollers
-                            </span>
+    <section id="skills" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-fade">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Technical Skills</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- CAD Skills -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-lg card-hover section-fade">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i data-lucide="box" class="w-6 h-6 mr-2 text-indigo-600"></i>
+                        Computer-Aided Design (CAD)
+                    </h3>
+                    <div class="flex justify-around items-center">
+                        <div class="flex flex-col items-center">
+                            <img src="http://static.photos/technology/80x80/20" alt="SolidWorks" class="w-16 h-16 object-contain mb-2 rounded-lg shadow-sm">
+                            <span class="text-sm font-medium text-gray-700">SolidWorks</span>
                         </div>
-                    </div>
-                    
-                    <div class="mb-8">
-                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-code text-primary mr-2"></i> Software
-                        </h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-database mr-2"></i> PL/SQL
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-database mr-2"></i> SQL
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-laptop-code mr-2"></i> ARM assembly
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-cube mr-2"></i> KiCad
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-terminal mr-2"></i> Command
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-flask mr-2"></i> JupyterLab
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-chart-line mr-2"></i> MATLAB
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fab fa-cuttlefish mr-2"></i> C++
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fab fa-java mr-2"></i> Java
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fab fa-html5 mr-2"></i> HTML
-                            </span>
+                        <div class="flex flex-col items-center">
+                            <img src="http://static.photos/technology/80x80/21" alt="AutoCAD" class="w-16 h-16 object-contain mb-2 rounded-lg shadow-sm">
+                            <span class="text-sm font-medium text-gray-700">AutoCAD</span>
                         </div>
-                    </div>
-                    
-                    <div class="mb-8">
-                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-window-maximize text-primary mr-2"></i> Applications
-                        </h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-database mr-2"></i> Oracle APEX
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-cloud mr-2"></i> Databricks
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-chart-bar mr-2"></i> PowerBi
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-paint-brush mr-2"></i> Illustrator
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-image mr-2"></i> Photoshop
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-database mr-2"></i> Access
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-file-powerpoint mr-2"></i> PowerPoint
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-file-excel mr-2"></i> Excel
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-file-word mr-2"></i> MS Word
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-desktop text-primary mr-2"></i> Operating Systems
-                        </h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fab fa-apple mr-2"></i> macOS
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fab fa-android mr-2"></i> Android
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fab fa-linux mr-2"></i> Linux
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fas fa-desktop mr-2"></i> ReactOS
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fab fa-windows mr-2"></i> Windows
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full flex items-center">
-                                <i class="fab fa-apple mr-2"></i> iOS
-                            </span>
+                        <div class="flex flex-col items-center">
+                            <img src="http://static.photos/technology/80x80/22" alt="CATIA" class="w-16 h-16 object-contain mb-2 rounded-lg shadow-sm">
+                            <span class="text-sm font-medium text-gray-700">CATIA</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Analytical Skills -->
-                <div>
-                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">Analytical Skills</h3>
-                    
-                    <div class="mb-8">
-                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-square-root-alt text-primary mr-2"></i> Mathematical Modeling
-                        </h4>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full">
-                                Algebraic Optimization
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full">
-                                Finite Elements
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full">
-                                Cartesian Geometry
-                            </span>
-                            <span class="bg-blue-100 text-primary px-4 py-2 rounded-full">
-                                Numerical Methods
-                            </span>
+
+                <!-- PCB Design -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-lg card-hover section-fade">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i data-lucide="cpu" class="w-6 h-6 mr-2 text-indigo-600"></i>
+                        PCB Design
+                    </h3>
+                    <div class="flex justify-around items-center">
+                        <div class="flex flex-col items-center">
+                            <img src="http://static.photos/technology/80x80/30" alt="Altium" class="w-16 h-16 object-contain mb-2 rounded-lg shadow-sm">
+                            <span class="text-sm font-medium text-gray-700">Altium</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="http://static.photos/technology/80x80/31" alt="Eagle" class="w-16 h-16 object-contain mb-2 rounded-lg shadow-sm">
+                            <span class="text-sm font-medium text-gray-700">Eagle</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <img src="http://static.photos/technology/80x80/32" alt="KiCad" class="w-16 h-16 object-contain mb-2 rounded-lg shadow-sm">
+                            <span class="text-sm font-medium text-gray-700">KiCad</span>
                         </div>
                     </div>
-                    
-                    <div>
-                        <h4 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-chart-pie text-primary mr-2"></i> Statistical Reasoning
-                        </h4>
-                        <p class="text-gray-700 bg-blue-50 p-4 rounded-lg">
-                            Exceptional capability in researching, detailing, and presenting significant data to clientele. 
-                            Skilled in data analysis, interpretation, and visualization to drive decision-making processes.
-                        </p>
+                </div>
+
+                <!-- Embedded Systems -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-lg card-hover section-fade">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i data-lucide="microchip" class="w-6 h-6 mr-2 text-indigo-600"></i>
+                        Embedded Systems
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-2 bg-white rounded-lg shadow-sm">
+                            <img src="http://static.photos/technology/40x40/40" alt="Arduino" class="w-8 h-8 object-contain mr-3 rounded">
+                            <span class="text-gray-700 font-medium">Arduino</span>
+                        </div>
+                        <div class="flex items-center p-2 bg-white rounded-lg shadow-sm">
+                            <img src="http://static.photos/technology/40x40/41" alt="TI LaunchPad" class="w-8 h-8 object-contain mr-3 rounded">
+                            <span class="text-gray-700 font-medium">TI LaunchPad</span>
+                        </div>
+                        <div class="flex items-center p-2 bg-white rounded-lg shadow-sm">
+                            <img src="http://static.photos/technology/40x40/42" alt="EV3" class="w-8 h-8 object-contain mr-3 rounded">
+                            <span class="text-gray-700 font-medium">EV3 Firmware</span>
+                        </div>
+                        <div class="flex items-center p-2 bg-white rounded-lg shadow-sm">
+                            <img src="http://static.photos/technology/40x40/43" alt="Elegoo" class="w-8 h-8 object-contain mr-3 rounded">
+                            <span class="text-gray-700 font-medium">Elegoo Uno R3</span>
+                        </div>
+                        <div class="flex items-center p-2 bg-white rounded-lg shadow-sm">
+                            <img src="http://static.photos/technology/40x40/44" alt="ESP32" class="w-8 h-8 object-contain mr-3 rounded">
+                            <span class="text-gray-700 font-medium">ESP32/ESP8266</span>
+                        </div>
+                        <div class="flex items-center p-2 bg-white rounded-lg shadow-sm">
+                            <img src="http://static.photos/technology/40x40/45" alt="STM32" class="w-8 h-8 object-contain mr-3 rounded">
+                            <span class="text-gray-700 font-medium">STM32 microcontrollers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programming Languages -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-lg card-hover section-fade lg:col-span-2">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i data-lucide="code" class="w-6 h-6 mr-2 text-indigo-600"></i>
+                        Programming Languages
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="file-code" class="w-5 h-5 mr-3 text-blue-600"></i>
+                            <span class="text-gray-700 font-medium">C++</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="file-code" class="w-5 h-5 mr-3 text-yellow-600"></i>
+                            <span class="text-gray-700 font-medium">Python</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5 mr-3 text-orange-600"></i>
+                            <span class="text-gray-700 font-medium">MATLAB</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="coffee" class="w-5 h-5 mr-3 text-red-600"></i>
+                            <span class="text-gray-700 font-medium">Java</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="database" class="w-5 h-5 mr-3 text-purple-600"></i>
+                            <span class="text-gray-700 font-medium">SQL</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="terminal" class="w-5 h-5 mr-3 text-gray-600"></i>
+                            <span class="text-gray-700 font-medium">ARM Assembly</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Science & AI -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-lg card-hover section-fade">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i data-lucide="brain" class="w-6 h-6 mr-2 text-indigo-600"></i>
+                        Data Science & AI
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="network" class="w-5 h-5 mr-3 text-pink-600"></i>
+                            <span class="text-gray-700 font-medium">Machine Learning</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="workflow" class="w-5 h-5 mr-3 text-teal-600"></i>
+                            <span class="text-gray-700 font-medium">Data Pipelines</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="pie-chart" class="w-5 h-5 mr-3 text-cyan-600"></i>
+                            <span class="text-gray-700 font-medium">Data Visualization</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <i data-lucide="eye" class="w-5 h-5 mr-3 text-indigo-600"></i>
+                            <span class="text-gray-700 font-medium">Computer Vision</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -421,41 +522,52 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-blue-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-primary mb-12 section-header">Contact Me</h2>
-            
-            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-                <div class="flex items-center mb-6">
-                    <div class="bg-primary text-white p-3 rounded-full mr-4">
-                        <i class="fas fa-envelope text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800">Email</h3>
-                        <p class="text-gray-600">anishsiddiqui99@gmail.com</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center mb-6">
-                    <div class="bg-primary text-white p-3 rounded-full mr-4">
-                        <i class="fab fa-linkedin-in text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800">LinkedIn</h3>
-                        <a href="https://www.linkedin.com/in/anishsiddiqui99" target="_blank" class="text-blue-600 hover:underline">
-                        www.linkedin.com/in/anishsiddiqui99
+    <section id="contact" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-fade">
+                <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+                <div class="w-24 h-1 bg-indigo-500 mx-auto"></div>
+                <p class="mt-4 text-gray-400 text-lg">Let's collaborate on your next project</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto section-fade">
+                <div class="bg-gray-800 rounded-2xl p-8 shadow-2xl">
+                    <div class="space-y-6">
+                        <a href="mailto:john.doe@example.com" class="flex items-center p-4 bg-gray-700 rounded-xl hover:bg-gray-600 transition group">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition">
+                                <i data-lucide="mail" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-1">Email</p>
+                                <p class="text-lg font-semibold text-white">john.doe@example.com</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 ml-auto text-gray-400 group-hover:text-white transition"></i>
                         </a>
 
+                        <a href="https://linkedin.com/in/johndoe" target="_blank" class="flex items-center p-4 bg-gray-700 rounded-xl hover:bg-gray-600 transition group">
+                            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition">
+                                <i data-lucide="linkedin" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-1">LinkedIn</p>
+                                <p class="text-lg font-semibold text-white">linkedin.com/in/johndoe</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 ml-auto text-gray-400 group-hover:text-white transition"></i>
+                        </a>
+
+                        <div class="flex items-center p-4 bg-gray-700 rounded-xl">
+                            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-1">Location</p>
+                                <p class="text-lg font-semibold text-white">San Francisco, California</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="flex items-center">
-                    <div class="bg-primary text-white p-3 rounded-full mr-4">
-                        <i class="fas fa-map-marker-alt text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800">Location</h3>
-                        <p class="text-gray-600">Houston, Texas</p>
+
+                    <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                        <p class="text-gray-400 text-sm">Available for freelance projects and full-time opportunities</p>
                     </div>
                 </div>
             </div>
@@ -463,59 +575,85 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-primary text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Anish Siddiqui. All rights reserved.</p>
-            
+    <footer class="bg-gray-950 text-gray-400 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm">&copy; 2024 John Doe. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
-        <i class="fas fa-arrow-up"></i>
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition opacity-0 invisible z-40">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
     </button>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
-        // Back to top button
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('opacity-0', 'invisible');
-                backToTopButton.classList.add('opacity-100', 'visible');
+        // Close mobile menu when clicking on a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-fade').forEach((element) => {
+            observer.observe(element);
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
             } else {
-                backToTopButton.classList.remove('opacity-100', 'visible');
-                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
             }
         });
-        
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
-        // Smooth scrolling for navigation links
+        // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    mobileMenu.classList.add('hidden');
                 }
             });
         });
